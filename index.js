@@ -24,7 +24,7 @@ connectDatabase();
 
 
 // Routes
-app.use('/api/orders', require('../order-mgmt-backend/routes/orders'));
+app.use('/api/orders', require('./routes/orders'));
 
 // Start Server
 app.listen(PORT, () => {
