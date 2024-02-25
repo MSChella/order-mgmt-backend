@@ -2,6 +2,7 @@
 const express = require('express');
 const router = express.Router();
 const Order = require('../models/order');
+const PlacedOrder = require('../models/placeOrder')
 
 // Get all orders
 router.get('/', async (req, res) => {
@@ -29,6 +30,20 @@ router.post('/', async (req, res) => {
         res.status(201).json(newOrder);
     } catch (error) {
         res.status(400).json({ message: error.message });
+    }
+});
+
+
+//Create a router for the Orders placed from the frontend
+router.post('/submit-orders', async (req, res) => {
+    const submittedOrders = req.body; // Assuming you send an array of orders in the request body
+
+    try {
+        // Store the submitted orders in the database
+        const savedOrders = await PlacedOrder.insertMany(submittedOrders);
+        res.status(201).json(savedOrders);
+    } catch (error) {
+        res.status(500).json({ message: 'Error submitting orders', error: error.message });
     }
 });
 
