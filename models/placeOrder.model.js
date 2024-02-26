@@ -6,7 +6,7 @@ const placedOrderSchema = new mongoose.Schema({
     product: String,
     quantity: Number,
     price: Number,
-}, { strict: true });
+}, { strict: false });
 
 const PlacedOrder = mongoose.model('PlacedOrder', placedOrderSchema, 'placedOrders');
 

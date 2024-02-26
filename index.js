@@ -22,9 +22,16 @@ require("dotenv").config();
 // MongoDB Connection
 connectDatabase();
 
-
+app.use(express.static(__dirname + "/public"));
 // Routes
-app.use('/api/orders', require('./routes/orders'));
+const ordersRouter = require('./controller/orders.controller');
+const placedOrderRouter = require('./controller/placedOrder.controller');
+const usersRouter = require('./controller/auth.controller');
+
+
+app.use('/api/orders', ordersRouter);
+app.use('/api/place-orders', placedOrderRouter);
+app.use('/api/user', usersRouter);
 
 // Start Server
 app.listen(PORT, () => {

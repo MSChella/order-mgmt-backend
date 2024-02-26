@@ -1,8 +1,8 @@
 // routes/orders.js
 const express = require('express');
 const router = express.Router();
-const Order = require('../models/order');
-const PlacedOrder = require('../models/placeOrder')
+const Order = require('../models/order.model');
+
 
 // Get all orders
 router.get('/', async (req, res) => {
@@ -17,7 +17,7 @@ router.get('/', async (req, res) => {
 });
 
 // Create a new order
-router.post('/', async (req, res) => {
+router.post('/create', async (req, res) => {
     const order = new Order({
         orderNumber: req.body.orderNumber,
         product: req.body.product,
@@ -35,16 +35,16 @@ router.post('/', async (req, res) => {
 
 
 //Create a router for the Orders placed from the frontend
-router.post('/submit-orders', async (req, res) => {
-    const submittedOrders = req.body; // Assuming you send an array of orders in the request body
+// router.post('/submit-orders', async (req, res) => {
+//     const submittedOrders = req.body; // Assuming you send an array of orders in the request body
 
-    try {
-        // Store the submitted orders in the database
-        const savedOrders = await PlacedOrder.insertMany(submittedOrders);
-        res.status(201).json(savedOrders);
-    } catch (error) {
-        res.status(500).json({ message: 'Error submitting orders', error: error.message });
-    }
-});
+//     try {
+//         // Store the submitted orders in the database
+//         const savedOrders = await PlacedOrder.insertMany(submittedOrders);
+//         res.status(201).json(savedOrders);
+//     } catch (error) {
+//         res.status(500).json({ message: 'Error submitting orders', error: error.message });
+//     }
+// });
 
 module.exports = router;
