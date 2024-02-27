@@ -2,10 +2,11 @@
 const express = require('express');
 const router = express.Router();
 const Order = require('../models/order.model');
+const verifyToken = require('../middleware/authMiddleware');
 
 
 // Get all orders
-router.get('/', async (req, res) => {
+router.get('/', verifyToken, async (req, res) => {
     try {
         const orders = await Order.find();
         console.log('Fetched orders:', orders);

@@ -6,10 +6,10 @@ const mongoose = require('mongoose');
 const { connectDatabase } = require('./dbConfig');
 
 const app = express();
-const PORT = process.env.PORT || 3000;
+const PORT = process.env.PORT || 5000;
 
 const corsOptions = {
-    origin: 'http://localhost:3000',
+    origin: 'http://localhost:5000',
     optionsSuccessStatus: 200,
 };
 
@@ -31,7 +31,7 @@ const usersRouter = require('./controller/auth.controller');
 
 app.use('/api/orders', ordersRouter);
 app.use('/api/place-orders', placedOrderRouter);
-app.use('/api/user', usersRouter);
+app.use('/api/auth', usersRouter);
 
 // Start Server
 app.listen(PORT, () => {

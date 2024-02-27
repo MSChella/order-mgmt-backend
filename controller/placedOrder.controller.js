@@ -1,9 +1,10 @@
 const express = require('express');
 const router = express.Router();
 const PlacedOrder = require('../models/placeOrder.model');
+const verifyToken = require('../middleware/authMiddleware');
 
 
-router.get('/', async (req, res) => {
+router.get('/', verifyToken, async (req, res) => {
     try {
         const orders = await PlacedOrder.find();
         console.log('Fetched orders:', orders);
@@ -16,7 +17,7 @@ router.get('/', async (req, res) => {
 
 
 //Create a router for the Orders placed from the frontend
-router.post('/submit-orders', async (req, res) => {
+router.post('/submit-orders', verifyToken, async (req, res) => {
     const submittedOrders = req.body; // Assuming you send an array of orders in the request body
 
     try {
