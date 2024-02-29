@@ -1,4 +1,4 @@
-const test = require('dotenv').config();
+require('dotenv').config();
 
 const express = require('express');
 const router = express.Router();
