@@ -1,4 +1,5 @@
-require('dotenv').config();
+const test = require('dotenv').config();
+
 const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
@@ -8,19 +9,7 @@ const verifyToken = require('../middleware/authMiddleware');
 const User = require('../models/user.model');
 
 
-// const hashPassword = async (password) => {
-//     const saltRounds = 10;
-//     const hashedPassword = await bcrypt.hash(password, saltRounds);
-//     return hashedPassword;
-// };
-
-// // Function to compare a password with a hashed password
-// const comparePassword = async (password, hashedPassword) => {
-//     const match = await bcrypt.compare(password, hashedPassword);
-//     return match;
-// };
-
-// Signup
+console.log(test);
 router.post('/signup', async (req, res) => {
     try {
         const { username, password } = req.body;
