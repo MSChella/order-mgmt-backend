@@ -2,6 +2,7 @@ const express = require('express');
 const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
+const verifyToken = require('../middleware/authMiddleware');
 
 const User = require('../models/user.model');
 const { required } = require('nodemon/lib/config');
@@ -37,7 +38,11 @@ router.post('/signup', async (req, res) => {
         res.status(400).json({ message: error.message });
     }
 });
-
+router.get('/protected-route', verifyToken, (req, res) => {
+    // This route is protected and requires a valid JWT token
+    // The `verifyToken` middleware will check the token
+    res.json({ message: 'You have access to this protected route.' });
+});
 // Signin
 router.post('/signin', async (req, res) => {
     try {
@@ -53,6 +58,9 @@ router.post('/signin', async (req, res) => {
 
         if (!passwordMatch) {
             return res.status(401).json({ message: 'Invalid username or password' });
+        }
+        if (!process.env.JWT_SECRET) {
+            return res.status(500).json({ message: 'JWT secret is not defined' });
         }
 
         const token = jwt.sign({ username: user.username, userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
