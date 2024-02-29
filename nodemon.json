@@ -1,4 +1,6 @@
 {
-    "require": ["dotenv/config"]
+    "require": ["dotenv/config"],
+    "watch": ["src"],
+  "ext": "js json"
   }
   

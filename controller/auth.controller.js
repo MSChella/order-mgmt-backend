@@ -9,7 +9,7 @@ const verifyToken = require('../middleware/authMiddleware');
 const User = require('../models/user.model');
 
 
-console.log(test);
+
 router.post('/signup', async (req, res) => {
     try {
         const { username, password } = req.body;
@@ -49,13 +49,13 @@ router.post('/signin', async (req, res) => {
         if (!passwordMatch) {
             return res.status(401).json({ message: 'Invalid username or password' });
         }
-        if (!process.env.JWT_SECRET) {
+        if (!process.env.JWT_KEY) {
 
             console.log('JWT_SECRET not defined in environment variables');
             return res.status(500).json({ message: 'JWT secret is not defined' });
         }
 
-        const token = jwt.sign({ username: user.username, userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ username: user.username, userId: user._id }, process.env.JWT_KEY, { expiresIn: '1h' });
 
         // Include the token in the response
         res.status(200).json({ message: 'Signin successful', token });
