@@ -61,6 +61,8 @@ router.post('/signin', async (req, res) => {
             return res.status(401).json({ message: 'Invalid username or password' });
         }
         if (!process.env.JWT_SECRET) {
+
+            console.log('JWT_SECRET not defined in environment variables');
             return res.status(500).json({ message: 'JWT secret is not defined' });
         }
 
