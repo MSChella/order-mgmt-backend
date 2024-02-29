@@ -63,7 +63,7 @@ router.post('/signin', async (req, res) => {
         // // Include the token in the response
         // res.status(200).json({ message: 'Signin successful', token });
     } catch (error) {
-        res.status(500).json({ message: error.message });
+        res.status(501).json({ message: error.message });
     }
 });
 
