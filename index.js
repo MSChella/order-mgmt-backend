@@ -1,4 +1,5 @@
 // index.js
+require("dotenv").config();
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
@@ -17,7 +18,7 @@ app.use(cors(corsOptions));
 // Middleware
 app.use(bodyParser.json());
 
-require("dotenv").config();
+
 
 // MongoDB Connection
 connectDatabase();
