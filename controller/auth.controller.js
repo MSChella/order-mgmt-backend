@@ -49,6 +49,7 @@ router.post('/signin', async (req, res) => {
         if (!passwordMatch) {
             return res.status(401).json({ message: 'Invalid username or password' });
         }
+        console.log('This line should always execute.');
         if (!process.env.JWT_KEY) {
 
             console.log('JWT_SECRET not defined in environment variables');
