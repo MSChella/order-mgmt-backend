@@ -50,18 +50,18 @@ router.post('/signin', async (req, res) => {
             return res.status(401).json({ message: 'Invalid username or password' });
         }
         console.log('This line should always execute.');
-        if (!process.env.JWT_KEY) {
+        // if (!process.env.JWT_KEY) {
 
-            console.log('JWT_SECRET not defined in environment variables');
-            return res.status(500).json({ message: 'JWT secret is not defined' });
-        }
-        console.log('JWT_KEY:', process.env.JWT_KEY);
-        console.log('Process Environment:', process.env);
+        //     console.log('JWT_SECRET not defined in environment variables');
+        //     return res.status(500).json({ message: 'JWT secret is not defined' });
+        // }
+        // console.log('JWT_KEY:', process.env.JWT_KEY);
+        // console.log('Process Environment:', process.env);
 
-        const token = jwt.sign({ username: user.username, userId: user._id }, process.env.JWT_KEY, { expiresIn: '1h' });
+        // const token = jwt.sign({ username: user.username, userId: user._id }, process.env.JWT_KEY, { expiresIn: '1h' });
 
-        // Include the token in the response
-        res.status(200).json({ message: 'Signin successful', token });
+        // // Include the token in the response
+        // res.status(200).json({ message: 'Signin successful', token });
     } catch (error) {
         res.status(500).json({ message: error.message });
     }
