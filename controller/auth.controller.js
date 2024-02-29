@@ -6,7 +6,7 @@ const jwt = require('jsonwebtoken');
 const verifyToken = require('../middleware/authMiddleware');
 
 const User = require('../models/user.model');
-const { required } = require('nodemon/lib/config');
+
 
 // const hashPassword = async (password) => {
 //     const saltRounds = 10;
