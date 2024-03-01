@@ -8,7 +8,7 @@ const verifyToken = require('../middleware/authMiddleware');
 
 const User = require('../models/user.model');
 
-console.log('Executing auth.controller.js');
+
 
 
 router.post('/signup', async (req, res) => {
@@ -50,16 +50,16 @@ router.post('/signin', async (req, res) => {
         if (!passwordMatch) {
             return res.status(401).json({ message: 'Invalid username or password' });
         }
-        console.log('This line should always execute.');
-        if (!process.env.JWT_SECRET) {
-            console.log('Process Environment:', process.env);
-            console.log('JWT_SECRET not defined in environment variables');
-            return res.status(500).json({ message: 'JWT secret is not defined' });
-        }
-        console.log('JWT_KEY:', process.env.JWT_SECRET);
-        console.log('Process Environment:', process.env);
+        // console.log('This line should always execute.');
+        // if (!process.env.JWT_SECRET) {
+        //     console.log('Process Environment:', process.env);
+        //     console.log('JWT_SECRET not defined in environment variables');
+        //     return res.status(500).json({ message: 'JWT secret is not defined' });
+        // }
+        // console.log('JWT_KEY:', process.env.JWT_SECRET);
+        // console.log('Process Environment:', process.env);
 
-        const token = jwt.sign({ username: user.username, userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
+        const token = jwt.sign({ username: user.username, userId: user._id }, mySecretKey123, { expiresIn: '1h' });
 
         // Include the token in the response
         res.status(200).json({ message: 'Signin successful', token });
