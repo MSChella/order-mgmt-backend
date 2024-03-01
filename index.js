@@ -10,7 +10,7 @@ const app = express();
 const PORT = process.env.PORT || 5000;
 
 const corsOptions = {
-    origin: 'http://localhost:3000',
+    origin: ['http://localhost:3000', 'http://bookmybook.netlify.app'],
     optionsSuccessStatus: 200,
 };
 
