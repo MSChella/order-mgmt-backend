@@ -5,8 +5,9 @@ const router = express.Router();
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 const verifyToken = require('../middleware/authMiddleware');
+
 const User = require('../models/user.model');
-const jwtSecret = process.env.JWT_SECRET;
+
 
 
 router.post('/signup', async (req, res) => {
@@ -49,15 +50,15 @@ router.post('/signin', async (req, res) => {
             return res.status(401).json({ message: 'Invalid username or password' });
         }
         console.log('This line should always execute.');
-        if (!jwtSecret) {
+        if (!process.env.JWT_SECRET) {
 
             console.log('JWT_SECRET not defined in environment variables');
             return res.status(500).json({ message: 'JWT secret is not defined' });
         }
-        console.log('JWT_KEY:', jwtSecret);
+        console.log('JWT_KEY:', process.env.JWT_SECRET);
         console.log('Process Environment:', process.env);
 
-        const token = jwt.sign({ username: user.username, userId: user._id }, jwtSecret, { expiresIn: '1h' });
+        const token = jwt.sign({ username: user.username, userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
         // Include the token in the response
         res.status(200).json({ message: 'Signin successful', token });
