@@ -50,14 +50,6 @@ router.post('/signin', async (req, res) => {
         if (!passwordMatch) {
             return res.status(401).json({ message: 'Invalid username or password' });
         }
-        // console.log('This line should always execute.');
-        // if (!process.env.JWT_SECRET) {
-        //     console.log('Process Environment:', process.env);
-        //     console.log('JWT_SECRET not defined in environment variables');
-        //     return res.status(500).json({ message: 'JWT secret is not defined' });
-        // }
-        // console.log('JWT_KEY:', process.env.JWT_SECRET);
-        // console.log('Process Environment:', process.env);
 
         const token = jwt.sign({ username: user.username, userId: user._id }, process.env.JWT_SECRET, { expiresIn: '1h' });
 
