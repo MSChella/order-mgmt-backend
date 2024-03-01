@@ -8,6 +8,7 @@ const verifyToken = require('../middleware/authMiddleware');
 
 const User = require('../models/user.model');
 
+console.log('Executing auth.controller.js');
 
 
 router.post('/signup', async (req, res) => {
