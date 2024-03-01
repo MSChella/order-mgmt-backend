@@ -59,7 +59,7 @@ router.post('/signin', async (req, res) => {
         // console.log('JWT_KEY:', process.env.JWT_SECRET);
         // console.log('Process Environment:', process.env);
 
-        const token = jwt.sign({ username: user.username, userId: user._id }, mySecretKey123, { expiresIn: '1h' });
+        const token = jwt.sign({ username: user.username, userId: user._id }, 'mySecretKey123', { expiresIn: '1h' });
 
         // Include the token in the response
         res.status(200).json({ message: 'Signin successful', token });
